@@ -1,2 +1,2 @@
-# small_task
-Small Task from IPP
+# Particles
+Particles Task from IPP
