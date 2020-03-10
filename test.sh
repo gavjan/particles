@@ -1,11 +1,11 @@
 #!/bin/bash
 PROG="$1"
+REAL_PROG="$(realpath "$PROG")"
 DIR="$2"
 RED='\033[1;31m'
 GREEN='\033[0;32m'
 NC='\033[0m' # No Color
-FILES="$DIR"/*.in
-
+FILES="${DIR}/*.in"
 for f in $FILES
 do
 out="${f::-2}"
@@ -13,7 +13,7 @@ out="${out}out"
 
 err="${f::-2}"
 err="${err}err"
-valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all -q ./"$PROG" -g <"$f" >"$PROG".out 2>"$PROG".err
+valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all -q "$REAL_PROG" -g <"$f" >"$PROG".out 2>"$PROG".err
 
 DIFF1="$(diff "$out" "$PROG".out)"
 DIFF2="$(diff "$err" "$PROG".err)"
