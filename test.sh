@@ -1,4 +1,5 @@
 #!/bin/bash
+EXEC="test_exec"
 PROG="$1"
 REAL_PROG="$(realpath "$PROG")"
 DIR="$2"
@@ -13,10 +14,10 @@ out="${out}out"
 
 err="${f::-2}"
 err="${err}err"
-valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all -q "$REAL_PROG" -g <"$f" >"$PROG".out 2>"$PROG".err
+valgrind --error-exitcode=15 --leak-check=full --show-leak-kinds=all -q "$REAL_PROG" -g <"$f" >"$EXEC".out 2>"$EXEC".err
 
-DIFF1="$(diff "$out" "$PROG".out)"
-DIFF2="$(diff "$err" "$PROG".err)"
+DIFF1="$(diff "$out" "$EXEC".out)"
+DIFF2="$(diff "$err" "$EXEC".err)"
 if [ "$DIFF1" ] || [ "$DIFF2" ]; then
 	echo -e "${RED} ${f} didn't pass ${NC}"
 else
@@ -24,5 +25,5 @@ else
 fi
 
 done
-rm "$PROG".out
-rm "$PROG".err
+rm "$EXEC".out
+rm "$EXEC".err
