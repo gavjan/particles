@@ -43,17 +43,29 @@ After a correct execution of a command, the program writes:
 -   `integer` that is the energy value for the single parameter command `ENERGY`.
 -   `ERROR` to `stderr` for each incorrect line of command.
 
-## Example data
+## Examples
 
-Sample data for the program can be found in the attached files.
+Example tests for the program can be found in the folder `tests`.
 
-## Tests
-To check against the tests located in the folder `tests`:
+## Compile
 
+compile and run executable `particles`:
+```shell script
+make run
+```
+
+run with valgrind:
+```shell script
+make valgrind
+```
+
+check against the tests located in the folder `tests`:
 ```shell script
 make test
 ```
 
-Do wykrywania problemów z zarządzaniem pamięcią należy użyć programu `valgrind`.
+
+## Tests
+Tests can be found [here](https://github.com/gavjan/particles/releases/tag/tests)
 
 
