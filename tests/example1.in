@@ -1,0 +1,98 @@
+# 0, 01, 012, 0123 particles are declared.
+DECLARE 0123
+VALID 0
+VALID 01
+VALID 012
+VALID 0123
+VALID 1
+VALID 01232
+
+# particles 01232, 012321, 0123210 are additionally allowed.
+DECLARE 0123210
+VALID 0123
+VALID 01232
+VALID 012321
+VALID 0123210
+VALID 01232101
+
+# Declaring declared particles doesn't change anything.
+DECLARE 01
+VALID 0
+VALID 01
+VALID 012
+VALID 0123210
+VALID 01232101
+
+# Only particles 0, 01, 012, 0123, 01232 remain.
+REMOVE 012321
+VALID 0
+VALID 01
+VALID 012
+VALID 0123
+VALID 01232
+VALID 012321
+VALID 0123210
+VALID 01232101
+
+# Removing undeclared particles doesn't change anything.
+REMOVE 01232101232
+VALID 0
+VALID 01232
+VALID 012321
+
+# To particle 0 we assign energy 3, and to particle 01 we assign energy 6.
+ENERGY 0 3
+ENERGY 01 6
+ENERGY 0
+ENERGY 01
+
+# We are equalizing energies for particles 0 and 01. They will have energy 4.
+EQUAL 0 01
+ENERGY 0
+ENERGY 01
+
+# We equate energy for particles 01 and 012, i.e. particle 012 we assign energy 4.
+EQUAL 01 012
+ENERGY 012
+
+# After this operation, particles 0, 01, 012 will have energy 7.
+ENERGY 0 7
+ENERGY 0
+ENERGY 01
+ENERGY 012
+
+# Attempting to assign energy to an undeclared particle ends in error.
+ENERGY 30 30
+
+# Trying to equalize energy for undeclared particles ends in error.
+EQUAL 012 33
+EQUAL 31 32
+
+# Attempting to equalize energy if none of the particles has energy assigned ends in error.
+VALID 01232
+VALID 0123
+ENERGY 01232
+ENERGY 0123
+EQUAL 01232 0123
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
